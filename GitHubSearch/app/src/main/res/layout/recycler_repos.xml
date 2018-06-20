@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+   >
+
+    <LinearLayout
+        android:id="@+id/repo_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/repo_name"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/repo_details"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/circle"/>
+
+
+            <TextView
+                android:id="@+id/repo_language"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/repo_last_updated_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000"/>
+
+</android.support.constraint.ConstraintLayout>

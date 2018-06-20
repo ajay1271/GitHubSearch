@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GitHub Search</string>
+    <string name="BASE_URL">https://api.github.com/search/users?q=</string>
+
+</resources>
