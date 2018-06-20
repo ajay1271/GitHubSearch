@@ -18,13 +18,10 @@ import java.util.ArrayList;
 
 public class ItemFragment extends Fragment {
 
-    ArrayList<Item>  ar;
-    Context context;
-
+    ArrayList<Item> ar;
 
     public ItemFragment() {
     }
-
 
 
     @Override
@@ -45,9 +42,7 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.list);
-
-
-        recyclerView.setAdapter(new UsersList(ar,getActivity().getBaseContext()));
+        recyclerView.setAdapter(new UsersList(ar, getActivity().getBaseContext()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
         return view;

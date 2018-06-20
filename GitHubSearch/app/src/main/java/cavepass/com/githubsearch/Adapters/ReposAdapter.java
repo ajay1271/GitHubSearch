@@ -21,6 +21,8 @@ import com.bumptech.glide.Glide;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.Instant;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 
 import cavepass.com.githubsearch.ModelClass.GitRepo;
@@ -80,6 +82,10 @@ public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ViewHolder> 
 
         String languageUSed = item.get(position).getLanguage();
 
+
+        // Here we use the dot generally used in github to represent the language
+        //According to the language we set the dot
+
         if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.CPP))){
 
             holder.dot.setImageResource(R.drawable.dot_c_plus_plus);
@@ -121,7 +127,7 @@ public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ViewHolder> 
 
             holder.dot.setImageResource(R.drawable.circle);
         }
-
+        
 
 
         holder.languageUsed.setText("" + item.get(position).getLanguage());

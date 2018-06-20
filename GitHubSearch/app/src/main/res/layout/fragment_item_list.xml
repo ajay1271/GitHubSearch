@@ -6,8 +6,8 @@
     android:name="cavepass.com.githubsearch.ItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="@dimen/margin_extra_large"
+    android:layout_marginRight="@dimen/margin_extra_large"
     app:layoutManager="LinearLayoutManager"
     tools:context="cavepass.com.githubsearch.ItemFragment"
    />

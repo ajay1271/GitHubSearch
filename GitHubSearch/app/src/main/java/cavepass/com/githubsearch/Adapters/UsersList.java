@@ -30,10 +30,7 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
     private Context context;
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-
 
 
         TextView user_id;
@@ -49,8 +46,6 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
             user_id = v.findViewById(R.id.user_id);
 
             profileImage=v.findViewById(R.id.user_profile_image);
-
-
         }
 
     }
@@ -76,9 +71,6 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
 
 
        Glide.with(context).load(item.get(position).getAvatarUrl() ).into(holder.profileImage);
-
-
-
 
         holder.user_id.setText("@"+item.get(position).getLogin());
 

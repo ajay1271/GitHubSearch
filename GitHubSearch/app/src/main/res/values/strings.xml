@@ -13,8 +13,9 @@
     <string name="gitScore">gitScore</string>
     <string name="object">object</string>
     <string name="searching">Searching...</string>
-    <string name="results_found">Results found.</string>
+    <string name="results_found">" Results found."</string>
     <string name="error">Error</string>
     <string name="na">NA</string>
+    <string name="enterName">Please enter user name</string>
 
 </resources>
