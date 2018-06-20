@@ -80,37 +80,37 @@ public class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ViewHolder> 
 
         String languageUSed = item.get(position).getLanguage();
 
-        if(languageUSed!=null&&languageUSed.equals("C++")){
+        if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.CPP))){
 
             holder.dot.setImageResource(R.drawable.dot_c_plus_plus);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("Java")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.Java))){
 
             holder.dot.setImageResource(R.drawable.dot_java);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("C")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.C))){
 
             holder.dot.setImageResource(R.drawable.dot_c);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("C#")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.C_Sharp))){
 
             holder.dot.setImageResource(R.drawable.dot_c_sharp);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("Python")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.Python))){
 
             holder.dot.setImageResource(R.drawable.dot_python);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("HTML")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.HTML))){
 
             holder.dot.setImageResource(R.drawable.dot_html);
 
         }
-        else if(languageUSed!=null&&languageUSed.equals("CSS")){
+        else if(languageUSed!=null&&languageUSed.equals(context.getString(R.string.CSS))){
 
             holder.dot.setImageResource(R.drawable.dot_css);
 

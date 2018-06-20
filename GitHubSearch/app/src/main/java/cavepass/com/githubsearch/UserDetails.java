@@ -1,5 +1,6 @@
 package cavepass.com.githubsearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -34,12 +35,12 @@ import retrofit2.Response;
 
 public class UserDetails extends AppCompatActivity {
 
-    String userName = "Details";
+    String userName;
     ArrayList<GitRepo> repos;
     String profileUrl;
     ImageView image;
-    String followers_count = "NA";
-    String following_count = "NA";
+    String followers_count;
+    String following_count;
     TextView followers;
     TextView following;
     TextView gitScore;
@@ -51,106 +52,106 @@ public class UserDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_details);
 
-
-        image = findViewById(R.id.profile_image);
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final RecyclerView recyclerView = findViewById(R.id.repos_recycler_view);
-
-        Call<List<GitRepo>> call2;
-        Call<List<FollowersPojo>> callForFollowers;
-        Call<List<FollowingPojo>> callForFollowing;
+        if(CheckNetwork.isInternetAvailable(this)) {
 
 
-        userName = getIntent().getStringExtra("userName");
-        profileUrl = getIntent().getStringExtra("profileImage");
-        gitScore_count = getIntent().getStringExtra("gitScore");
+            image = findViewById(R.id.profile_image);
 
-        Log.e("User Name", " = " + userName);
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+            final RecyclerView recyclerView = findViewById(R.id.repos_recycler_view);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle(userName);
-
-
-        call2 = apiService.getrepos(userName);
-        callForFollowers = apiService.getFollowers(userName);
-        callForFollowing = apiService.getFollowing(userName);
-
-        call2.enqueue(new Callback<List<GitRepo>>() {
-            @Override
-            public void onResponse(Call<List<GitRepo>> call2, Response<List<GitRepo>> response2) {
-
-                Glide.with(getBaseContext()).load(profileUrl).into(image);
+            Call<List<GitRepo>> call2;
+            Call<List<FollowersPojo>> callForFollowers;
+            Call<List<FollowingPojo>> callForFollowing;
 
 
-                try {
-                    repos = new ArrayList<>(response2.body());
-                    recyclerView.setAdapter(new ReposAdapter(repos, getBaseContext()));
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+            userName = getIntent().getStringExtra(getString(R.string.userName));
+            profileUrl = getIntent().getStringExtra(getString(R.string.profileImage));
+            gitScore_count = getIntent().getStringExtra(getString(R.string.gitScore));
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setTitle(userName);
+
+
+            call2 = apiService.getrepos(userName);
+            callForFollowers = apiService.getFollowers(userName);
+            callForFollowing = apiService.getFollowing(userName);
+
+            call2.enqueue(new Callback<List<GitRepo>>() {
+                @Override
+                public void onResponse(Call<List<GitRepo>> call2, Response<List<GitRepo>> response2) {
+
+                    Glide.with(getBaseContext()).load(profileUrl).into(image);
+
+
+                    try {
+                        repos = new ArrayList<>(response2.body());
+                        recyclerView.setAdapter(new ReposAdapter(repos, getBaseContext()));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+
+                    } catch (Exception e) {
+                        Log.e(getString(R.string.error), call2.request().url().toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<GitRepo>> call, Throwable t) {
+
+                    Log.e(getString(R.string.error), t.getMessage());
 
                 }
-                catch (Exception e){
-                    Log.e("URL REPOS",call2.request().url().toString());
+            });
+
+            callForFollowers.enqueue(new Callback<List<FollowersPojo>>() {
+                @Override
+                public void onResponse(Call<List<FollowersPojo>> call, Response<List<FollowersPojo>> response) {
+
+
+                    if (response.body() != null) {
+                        followers_count = "" + response.body().size();
+                    } else {
+                        followers_count = getString(R.string.na);
+                    }
+                    followers = findViewById(R.id.followers_count);
+                    followers.setText(followers_count);
+
+                    gitScore = findViewById(R.id.git_score_count);
+                    gitScore.setText("" + gitScore_count);
+
+
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<GitRepo>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<FollowersPojo>> call, Throwable t) {
 
-                Log.e("FAILURE", t.getMessage());
-
-            }
-        });
-
-        callForFollowers.enqueue(new Callback<List<FollowersPojo>>() {
-            @Override
-            public void onResponse(Call<List<FollowersPojo>> call, Response<List<FollowersPojo>> response) {
-
-
-                if (response.body()!= null) {
-                    followers_count = ""+ response.body().size();
                 }
-                followers = findViewById(R.id.followers_count);
-                followers.setText(followers_count);
+            });
+            callForFollowing.enqueue(new Callback<List<FollowingPojo>>() {
+                @Override
+                public void onResponse(Call<List<FollowingPojo>> call, Response<List<FollowingPojo>> response) {
 
-                gitScore = findViewById(R.id.git_score_count);
-                gitScore.setText("" + gitScore_count);
+                    if (response.body() != null) {
+                        following_count = "" + response.body().size();
+                    } else {
+                        following_count = getString(R.string.na);
+                    }
+                    following = findViewById(R.id.following_count);
+                    following.setText(following_count);
 
-                /*
 
-
-                Log.e("Followers", "is" + response.body().size());
-                Log.e("GitScore", "is" + gitScore_count);
-
-               */
-
-            }
-
-            @Override
-            public void onFailure(Call<List<FollowersPojo>> call, Throwable t) {
-
-            }
-        });
-        callForFollowing.enqueue(new Callback<List<FollowingPojo>>() {
-            @Override
-            public void onResponse(Call<List<FollowingPojo>> call, Response<List<FollowingPojo>> response) {
-
-                if (response.body() != null) {
-                    following_count = ""+response.body().size();
                 }
-                following = findViewById(R.id.following_count);
-                following.setText(following_count);
 
+                @Override
+                public void onFailure(Call<List<FollowingPojo>> call, Throwable t) {
 
-            }
-
-            @Override
-            public void onFailure(Call<List<FollowingPojo>> call, Throwable t) {
-
-            }
-        });
-
+                }
+            });
+        }
+        else{
+            Intent i = new Intent(this,NoInternet.class);
+            startActivity(i);
+        }
 
     }
 

@@ -33,7 +33,7 @@ public class ItemFragment extends Fragment {
 
         if (getArguments() != null) {
 
-            ar = getArguments().getParcelableArrayList("object");
+            ar = getArguments().getParcelableArrayList(getString(R.string.object));
 
 
         }
@@ -45,11 +45,10 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.list);
-        Log.e("new", ""+ar.size());
 
 
         recyclerView.setAdapter(new UsersList(ar,getActivity().getBaseContext()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
         return view;
 

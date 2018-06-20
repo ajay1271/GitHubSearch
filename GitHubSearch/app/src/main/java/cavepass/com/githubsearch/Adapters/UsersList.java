@@ -76,7 +76,7 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
 
 
        Glide.with(context).load(item.get(position).getAvatarUrl() ).into(holder.profileImage);
-// Log.e("url","name :"+item.get(position).getLogin()+" Avatar "+item.get(position).getFollowersUrl());
+
 
 
 
@@ -86,8 +86,6 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
             @Override
             public void onClick(View view) {
 
-                Log.e("GIT SCORE",""+item.get(position).getScore());
-
                 DecimalFormat df = new DecimalFormat("#.##");
 
                 df.setRoundingMode(RoundingMode.FLOOR);
@@ -95,9 +93,9 @@ public class UsersList extends RecyclerView.Adapter<UsersList.ViewHolder> {
                 double score = new Double(df.format(item.get(position).getScore()));
 
                 Intent i =  new Intent(context, UserDetails.class);
-                i.putExtra("userName",item.get(position).getLogin());
-                i.putExtra("profileImage",item.get(position).getAvatarUrl());
-                i.putExtra("gitScore",""+score);
+                i.putExtra(context.getString(R.string.userName),item.get(position).getLogin());
+                i.putExtra(context.getString(R.string.profileImage),item.get(position).getAvatarUrl());
+                i.putExtra(context.getString(R.string.gitScore),""+score);
                 context.startActivity(i);
             }
         });

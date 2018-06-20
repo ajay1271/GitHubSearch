@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, editText.getText(), Toast.LENGTH_SHORT).show();
 
-                    searchStatus.setText("Searching...");
+                    searchStatus.setText(getString(R.string.searching));
 
 
             /*  FETCHING JSON USING RETROFIT */
@@ -80,19 +80,17 @@ public class MainActivity extends AppCompatActivity {
 
                             users = new ArrayList<>(response.body().getItems());
 
-                            searchStatus.setText(users.size()+" Results found");
+                            searchStatus.setText(users.size()+getString(R.string.results_found));
 
                             if(users.size()!=0) {
 
 
-                                Toast.makeText(MainActivity.this, "" + users.get(0).getLogin(), Toast.LENGTH_SHORT).show();
-                                Log.e("URL", call.request().url().toString());
 
 
                                 ItemFragment fragment = new ItemFragment();
 
                                 Bundle uiBundle = new Bundle();
-                                uiBundle.putParcelableArrayList("object", users);
+                                uiBundle.putParcelableArrayList(getString(R.string.object), users);
 
 
                                 fragment.setArguments(uiBundle);
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<GitUser> call, Throwable t) {
 
-                            Log.e("FAILURE", t.getMessage());
+                            Log.e(getString(R.string.error), t.getMessage());
 
                         }
                     });
