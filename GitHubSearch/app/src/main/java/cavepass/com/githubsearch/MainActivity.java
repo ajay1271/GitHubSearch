@@ -2,6 +2,8 @@ package cavepass.com.githubsearch;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cavepass.com.githubsearch.IdlingResource.SimpleIdlingResource;
 import cavepass.com.githubsearch.ModelClass.GitRepo;
 import cavepass.com.githubsearch.ModelClass.GitUser;
 import cavepass.com.githubsearch.ModelClass.Item;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Item> users;
     ArrayList<GitRepo> repos;
 
+    private SimpleIdlingResource mIdlingResource;
+
     EditText editText;
     TextView searchStatus;
 
@@ -46,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         if(CheckNetwork.isInternetAvailable(this)) {
 
 
+
+
             searchStatus = findViewById(R.id.search_status);
 
 
@@ -57,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    mIdlingResource = getIdlingResource();
+                    mIdlingResource.setIdleState(false);
 
                     Toast.makeText(MainActivity.this, editText.getText(), Toast.LENGTH_SHORT).show();
 
@@ -81,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                             users = new ArrayList<>(response.body().getItems());
 
                             searchStatus.setText(users.size()+getString(R.string.results_found));
+
+                            mIdlingResource.setIdleState(true);
 
                             if(users.size()!=0) {
 
@@ -125,5 +137,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @VisibleForTesting
+    @NonNull
+    public SimpleIdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
     }
 }
