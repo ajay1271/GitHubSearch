@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/no_internet_image"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/no_internet"/>
+
+        <ImageView
+            android:id="@+id/retry"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_rotate_right_black_24dp" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

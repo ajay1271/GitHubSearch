@@ -1,6 +1,7 @@
 package cavepass.com.githubsearch;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<GitRepo> repos;
 
     EditText editText;
+    TextView searchStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,72 +42,90 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        editText = findViewById(R.id.edit_text);
 
-        LinearLayout searchButton = findViewById(R.id.search_button);
-
+        if(CheckNetwork.isInternetAvailable(this)) {
 
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            searchStatus = findViewById(R.id.search_status);
 
-                Toast.makeText(MainActivity.this, editText.getText(), Toast.LENGTH_SHORT).show();
+
+            editText = findViewById(R.id.edit_text);
+
+            LinearLayout searchButton = findViewById(R.id.search_button);
+
+
+            searchButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(MainActivity.this, editText.getText(), Toast.LENGTH_SHORT).show();
+
+                    searchStatus.setText("Searching...");
 
 
             /*  FETCHING JSON USING RETROFIT */
 
 
-                ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                    ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-                Call<GitUser> call;
-
-
-
-                call = apiService.getUsers(editText.getText().toString());
+                    Call<GitUser> call;
 
 
-
-                call.enqueue(new Callback<GitUser>() {
-                    @Override
-                    public void onResponse(Call<GitUser> call, Response<GitUser> response) {
-
-                        users = new ArrayList<>(response.body().getItems());
+                    call = apiService.getUsers(editText.getText().toString());
 
 
-                        Toast.makeText(MainActivity.this, "" + users.get(0).getLogin(), Toast.LENGTH_SHORT).show();
-                        Log.e("URL", call.request().url().toString());
+                    call.enqueue(new Callback<GitUser>() {
+                        @Override
+                        public void onResponse(Call<GitUser> call, Response<GitUser> response) {
+
+                            users = new ArrayList<>(response.body().getItems());
+
+                            searchStatus.setText(users.size()+" Results found");
+
+                            if(users.size()!=0) {
 
 
-                        ItemFragment fragment = new ItemFragment();
-
-                        Bundle uiBundle = new Bundle();
-                        uiBundle.putParcelableArrayList("object", users);
+                                Toast.makeText(MainActivity.this, "" + users.get(0).getLogin(), Toast.LENGTH_SHORT).show();
+                                Log.e("URL", call.request().url().toString());
 
 
-                        fragment.setArguments(uiBundle);
+                                ItemFragment fragment = new ItemFragment();
 
-                        FragmentManager fm = getFragmentManager();
-
-                        fm.beginTransaction().replace(R.id.search_items, fragment).commit();
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<GitUser> call, Throwable t) {
-
-                        Log.e("FAILURE", t.getMessage());
-
-                    }
-                });
-
-            }
-        });
+                                Bundle uiBundle = new Bundle();
+                                uiBundle.putParcelableArrayList("object", users);
 
 
+                                fragment.setArguments(uiBundle);
+
+                                FragmentManager fm = getFragmentManager();
+
+                                fm.beginTransaction().replace(R.id.search_items, fragment).commit();
+
+                            }
 
 
+                        }
+
+                        @Override
+                        public void onFailure(Call<GitUser> call, Throwable t) {
+
+                            Log.e("FAILURE", t.getMessage());
+
+                        }
+                    });
+
+                }
+            });
+
+
+        }
+
+        else{
+
+            Intent i = new Intent(this,NoInternet.class);
+            startActivity(i);
+
+        }
 
     }
 }

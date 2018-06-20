@@ -5,81 +5,227 @@ import java.io.Serializable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class GitRepo implements Serializable, Parcelable
 {
 
+    @SerializedName("id")
+    @Expose
     private Integer id;
+    @SerializedName("node_id")
+    @Expose
     private String nodeId;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("full_name")
+    @Expose
     private String fullName;
+    @SerializedName("owner")
+    @Expose
     private Owner owner;
+    @SerializedName("private")
+    @Expose
     private Boolean _private;
+    @SerializedName("html_url")
+    @Expose
     private String htmlUrl;
-    private String description;
+    @SerializedName("description")
+    @Expose
+    private Object description;
+    @SerializedName("fork")
+    @Expose
     private Boolean fork;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("forks_url")
+    @Expose
     private String forksUrl;
+    @SerializedName("keys_url")
+    @Expose
     private String keysUrl;
+    @SerializedName("collaborators_url")
+    @Expose
     private String collaboratorsUrl;
+    @SerializedName("teams_url")
+    @Expose
     private String teamsUrl;
+    @SerializedName("hooks_url")
+    @Expose
     private String hooksUrl;
+    @SerializedName("issue_events_url")
+    @Expose
     private String issueEventsUrl;
+    @SerializedName("events_url")
+    @Expose
     private String eventsUrl;
+    @SerializedName("assignees_url")
+    @Expose
     private String assigneesUrl;
+    @SerializedName("branches_url")
+    @Expose
     private String branchesUrl;
+    @SerializedName("tags_url")
+    @Expose
     private String tagsUrl;
+    @SerializedName("blobs_url")
+    @Expose
     private String blobsUrl;
+    @SerializedName("git_tags_url")
+    @Expose
     private String gitTagsUrl;
+    @SerializedName("git_refs_url")
+    @Expose
     private String gitRefsUrl;
+    @SerializedName("trees_url")
+    @Expose
     private String treesUrl;
+    @SerializedName("statuses_url")
+    @Expose
     private String statusesUrl;
+    @SerializedName("languages_url")
+    @Expose
     private String languagesUrl;
+    @SerializedName("stargazers_url")
+    @Expose
     private String stargazersUrl;
+    @SerializedName("contributors_url")
+    @Expose
     private String contributorsUrl;
+    @SerializedName("subscribers_url")
+    @Expose
     private String subscribersUrl;
+    @SerializedName("subscription_url")
+    @Expose
     private String subscriptionUrl;
+    @SerializedName("commits_url")
+    @Expose
     private String commitsUrl;
+    @SerializedName("git_commits_url")
+    @Expose
     private String gitCommitsUrl;
+    @SerializedName("comments_url")
+    @Expose
     private String commentsUrl;
+    @SerializedName("issue_comment_url")
+    @Expose
     private String issueCommentUrl;
+    @SerializedName("contents_url")
+    @Expose
     private String contentsUrl;
+    @SerializedName("compare_url")
+    @Expose
     private String compareUrl;
+    @SerializedName("merges_url")
+    @Expose
     private String mergesUrl;
+    @SerializedName("archive_url")
+    @Expose
     private String archiveUrl;
+    @SerializedName("downloads_url")
+    @Expose
     private String downloadsUrl;
+    @SerializedName("issues_url")
+    @Expose
     private String issuesUrl;
+    @SerializedName("pulls_url")
+    @Expose
     private String pullsUrl;
+    @SerializedName("milestones_url")
+    @Expose
     private String milestonesUrl;
+    @SerializedName("notifications_url")
+    @Expose
     private String notificationsUrl;
+    @SerializedName("labels_url")
+    @Expose
     private String labelsUrl;
+    @SerializedName("releases_url")
+    @Expose
     private String releasesUrl;
+    @SerializedName("deployments_url")
+    @Expose
     private String deploymentsUrl;
+    @SerializedName("created_at")
+    @Expose
     private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
     private String updatedAt;
+    @SerializedName("pushed_at")
+    @Expose
     private String pushedAt;
+    @SerializedName("git_url")
+    @Expose
     private String gitUrl;
+    @SerializedName("ssh_url")
+    @Expose
     private String sshUrl;
+    @SerializedName("clone_url")
+    @Expose
     private String cloneUrl;
+    @SerializedName("svn_url")
+    @Expose
     private String svnUrl;
-    private String homepage;
+    @SerializedName("homepage")
+    @Expose
+    private Object homepage;
+    @SerializedName("size")
+    @Expose
     private Integer size;
+    @SerializedName("stargazers_count")
+    @Expose
     private Integer stargazersCount;
+    @SerializedName("watchers_count")
+    @Expose
     private Integer watchersCount;
+    @SerializedName("language")
+    @Expose
     private String language;
+    @SerializedName("has_issues")
+    @Expose
     private Boolean hasIssues;
+    @SerializedName("has_projects")
+    @Expose
     private Boolean hasProjects;
+    @SerializedName("has_downloads")
+    @Expose
     private Boolean hasDownloads;
+    @SerializedName("has_wiki")
+    @Expose
     private Boolean hasWiki;
+    @SerializedName("has_pages")
+    @Expose
     private Boolean hasPages;
+    @SerializedName("forks_count")
+    @Expose
     private Integer forksCount;
+    @SerializedName("mirror_url")
+    @Expose
     private Object mirrorUrl;
+    @SerializedName("archived")
+    @Expose
     private Boolean archived;
+    @SerializedName("open_issues_count")
+    @Expose
     private Integer openIssuesCount;
-    private License license;
+    @SerializedName("license")
+    @Expose
+    private Object license;
+    @SerializedName("forks")
+    @Expose
     private Integer forks;
+    @SerializedName("open_issues")
+    @Expose
     private Integer openIssues;
+    @SerializedName("watchers")
+    @Expose
     private Integer watchers;
+    @SerializedName("default_branch")
+    @Expose
     private String defaultBranch;
     public final static Parcelable.Creator<GitRepo> CREATOR = new Creator<GitRepo>() {
 
@@ -97,7 +243,7 @@ public class GitRepo implements Serializable, Parcelable
 
     }
     ;
-    private final static long serialVersionUID = -3677486704381729731L;
+    private final static long serialVersionUID = -8310958133079501223L;
 
     protected GitRepo(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
@@ -107,7 +253,7 @@ public class GitRepo implements Serializable, Parcelable
         this.owner = ((Owner) in.readValue((Owner.class.getClassLoader())));
         this._private = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.htmlUrl = ((String) in.readValue((String.class.getClassLoader())));
-        this.description = ((String) in.readValue((String.class.getClassLoader())));
+        this.description = ((Object) in.readValue((Object.class.getClassLoader())));
         this.fork = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.url = ((String) in.readValue((String.class.getClassLoader())));
         this.forksUrl = ((String) in.readValue((String.class.getClassLoader())));
@@ -153,7 +299,7 @@ public class GitRepo implements Serializable, Parcelable
         this.sshUrl = ((String) in.readValue((String.class.getClassLoader())));
         this.cloneUrl = ((String) in.readValue((String.class.getClassLoader())));
         this.svnUrl = ((String) in.readValue((String.class.getClassLoader())));
-        this.homepage = ((String) in.readValue((String.class.getClassLoader())));
+        this.homepage = ((Object) in.readValue((Object.class.getClassLoader())));
         this.size = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.stargazersCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.watchersCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
@@ -167,7 +313,7 @@ public class GitRepo implements Serializable, Parcelable
         this.mirrorUrl = ((Object) in.readValue((Object.class.getClassLoader())));
         this.archived = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.openIssuesCount = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.license = ((License) in.readValue((License.class.getClassLoader())));
+        this.license = ((Object) in.readValue((Object.class.getClassLoader())));
         this.forks = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.openIssues = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.watchers = ((Integer) in.readValue((Integer.class.getClassLoader())));
@@ -233,11 +379,11 @@ public class GitRepo implements Serializable, Parcelable
         this.htmlUrl = htmlUrl;
     }
 
-    public String getDescription() {
+    public Object getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Object description) {
         this.description = description;
     }
 
@@ -601,11 +747,11 @@ public class GitRepo implements Serializable, Parcelable
         this.svnUrl = svnUrl;
     }
 
-    public String getHomepage() {
+    public Object getHomepage() {
         return homepage;
     }
 
-    public void setHomepage(String homepage) {
+    public void setHomepage(Object homepage) {
         this.homepage = homepage;
     }
 
@@ -713,11 +859,11 @@ public class GitRepo implements Serializable, Parcelable
         this.openIssuesCount = openIssuesCount;
     }
 
-    public License getLicense() {
+    public Object getLicense() {
         return license;
     }
 
-    public void setLicense(License license) {
+    public void setLicense(Object license) {
         this.license = license;
     }
 
